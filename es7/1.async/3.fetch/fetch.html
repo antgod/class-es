@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    if (fetch){
+        var URL = 'a.json';
+        fetch(URL,{mode: 'cors'}).then(function(response) {
+            return response.text();
+        }).then(function(text) {
+            console.log(text);
+        }).then(function(){
+            URL='b.json';
+            return fetch(URL);
+        }).then(function(response) {
+            return response.text();
+        }).then(function(text){
+            console.log(text);
+        }).then(function() {
+            URL='c.json';
+            return fetch(URL);
+        }).then(function(response) {
+            return response.text();
+        }).catch(function(){
+            console.log('请求失败');
+        });
+    } else {
+        // 不支持
+    }
+</script>
+</body>
+</html>
