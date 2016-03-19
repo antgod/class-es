@@ -5,7 +5,7 @@ var tmp = Date.now();
 
 function f(){
     //内层变量覆盖外层变量
-    console.log("内层变量覆盖外层变量tmp:"+tmp);
+    console.log("1.内层变量覆盖外层变量tmp:"+tmp);
     if (false){
         var tmp = "hello world";
     }
@@ -21,45 +21,45 @@ for (var i = 0; i < s.length; i++){
     //console.log(s[i]);
 }
 
-console.log("内部变量泄露成全局变量"+i); // 5
-
+console.log("2.内部变量泄露成全局变量:"+i); // 5
 
 //let实际上为JavaScript新增了块级作用域。
-{{{{{var a=1;}console.log("没有块级作用域var:"+a);}}}};
-{{{{{let b=1;}console.log("块级作用域let:"+typeof b);}}}};
+{{{{{var a=1;}console.log("3.没有块级作用域var-外部:"+a);}}}};
+{{{{{let b=1;}console.log("4.块级作用域let-外部:"+typeof b);}}}};
+
+console.log("3.没有块级作用域var-全局:"+a);
+console.log("4.没有块级作用域var-全局:"+typeof b);
 
 
 //块级作用域的出现，实际上使得获得广泛应用的立即执行匿名函数（IIFE）不再必要了。
 // IIFE写法
 if(true) {
     (function () {
-        var tmp = Date.now();
-        console.log("var 作用域内部：" + tmp);
+        var date = Date.now();
+        console.log("5.var 作用域内部：" + date);
     }());
 }
-console.log("var 作用域外部：" + tmp);
-
+console.log("5.var 作用域外部：" + typeof date);
 
 // 块级作用域写法
 if(true){
-    let tmp = Date.now();
-    console.log("let 作用域内部：" +tmp);
+    let date = Date.now();
+    console.log("6.let 作用域内部：" +date);
 }
-console.log("let 作用域外部：" +tmp);
-
+console.log("6.let 作用域外部：" +typeof date);
 
 //另外，ES6也规定，函数本身的作用域，在其所在的块级作用域之内。
-function f() { console.log('I am outside!'); }
+console.log("7.在ES5中运行，会得到“I am inside!”，但是在ES6中运行，会得到“I am outside!”");
+function fun() { console.log('7.I am outside!'); }
+
 (function () {
     if(false) {
         // 重复声明一次函数f
-        function f() { console.log('I am inside!'); }
+        function fun() { console.log('7.I am inside!'); }
     }
-
-    f();
+    fun();
 }());
 
-//上面代码在ES5中运行，会得到“I am inside!”，但是在ES6中运行，会得到“I am outside!”。
 //这是因为ES5存在函数提升，不管会不会进入 if代码块，函数声明都会提升到当前作用域的顶部，得到执行。
 //而ES6支持块级作用域，不管会不会进入if代码块，其内部声明的函数皆不会影响到作用域的外部。
 

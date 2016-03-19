@@ -1,17 +1,17 @@
 //ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
 var s = new Set();
 
-[2,3,5,4,5,2,2].map(x => s.add(x))
+[2,3,5,4,5,2,2].map(x => s.add(x));
 
-for (let i of s) {console.log("遍历set",i)}
+for (let i of s) {console.log("1.遍历set",i)}
 
 let set = new Set(['red', 'green', 'blue']);
-console.log("输出set",set);
+console.log("2.输出set",set);
 
 //JavaScript的对象（Object），本质上是键值对的集合（Hash结构）
 //但是只能用字符串当作键。这给它的使用带来了很大的限制。
 var map = new Map([["name", "张三"], ["title", "Author"]]);
-console.log("输出map",map);
+console.log("3.输出map",map);
 
 
 //Set、Map结构的实例有以下属性。

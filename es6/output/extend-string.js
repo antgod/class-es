@@ -44,21 +44,32 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	/**
-	 * Created by lihongji on 16/3/19.
-	 */
-
 	"use strict";
 
-	var proxy = new Proxy({}, {
-	    get: function get(target, property) {
-	        return 35;
-	    }
-	});
+	var data = { supplies: ["broom", "mop", "cleaner"] };
+	var template = "\n        <ul>\n          <% for(var i=0; i < data.supplies.length; i++) {%>\n            <li><%= data.supplies[i] %></li>\n          <% } %>\n        </ul>\n    ";
 
-	console.log(proxy.time); // 35
-	console.log(proxy.name); // 35
-	console.log(proxy.title); // 35
+	var parse = eval(compile(template));
+	console.log("1.原始字符串模板" + parse(data));
+
+	var template = "<ul>" + (data.supplies ? data.supplies.map(function (item) {
+	    return "<li>" + item + "</li>";
+	}).join("") : "") + "<ul>";
+	console.log("2.ES6字符串模板" + template);
+
+	//原始字符串模板
+	function compile(template) {
+	    var evalExpr = /<%=(.+?)%>/g;
+	    var expr = /<%([\s\S]+?)%>/g;
+
+	    template = template.replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`').replace(expr, '`); \n $1 \n  echo(`');
+
+	    template = 'echo(`' + template + '`);';
+
+	    var script = "(function parse(data){\n    var output = \"\";\n\n    function echo(html){\n      output += html;\n    }\n\n    " + template + "\n\n    return output;\n  })";
+
+	    return script;
+	}
 
 /***/ }
 /******/ ]);

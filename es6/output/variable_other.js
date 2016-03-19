@@ -55,28 +55,21 @@
 	var bar = _foo$bar.bar;
 	var foo = _foo$bar.foo;
 
-	console.log('{ bar, foo } = { foo: "aaa", bar: "bbb" }', bar, foo);
+	console.log('1.{ bar, foo } = { foo: "aaa", bar: "bbb" }', bar, foo);
 
 	//如果变量名与属性名不一致，必须写成下面这样。
 	var obj = { first: 'hello', last: 'world' };
 	var f = obj.first;
 	var l = obj.last;
 
-	console.log("{ first: 'hello', last: 'world' }", f, l);
-
-	//或者写成一行
-	var _aaa$bar = { aaa: "aaa", bar: "bbb" };
-	var a = _aaa$bar.aaa;
-	var b = _aaa$bar.bar;
-
-	console.log('{ aaa: a, bar: b } = { aaa: "aaa", bar: "bbb" }', a, b);
+	console.log("1.{ first: 'hello', last: 'world' }", f, l);
 
 	//上面代码将Math对象的对数、正弦、余弦三个方法，赋值到对应的变量上，使用起来就会方便很多。
 	var log = Math.log;
 	var sin = Math.sin;
 	var cos = Math.cos;
 
-	console.log('{ log, sin, cos } = Math', log, sin, cos);
+	console.log('1.{ log, sin, cos } = Math', log, sin, cos);
 
 	//字符串解构赋值：
 	console.log("-------字符串解构赋值---------");
@@ -91,12 +84,12 @@
 	var d = _hello2[3];
 	var e = _hello2[4];
 
-	console.log("[a, b, c, d, e] = 'hello'", a, b, c, d, e);
+	console.log("2.[a, b, c, d, e] = 'hello'", a, b, c, d, e);
 	//类似数组的对象都有一个length属性，因此还可以对这个属性解构赋值。
 	var _hello3 = 'hello';
 	var len = _hello3.length;
 
-	console.log("{length : len} = 'hello'", len);
+	console.log("2.{length : len} = 'hello'", len);
 
 	//其他解构赋值：
 	console.log("-------其他解构赋值---------");
@@ -104,11 +97,11 @@
 	var _ = 123;
 	var s = _.toString;
 
-	console.log("s === Number.prototype.toString", s === Number.prototype.toString);
+	console.log("3.s === Number.prototype.toString", s === Number.prototype.toString);
 	var _true = true;
 	var s = _true.toString;
 
-	console.log("s === Boolean.prototype.toString", s === Number.prototype.toString);
+	console.log("3.s === Boolean.prototype.toString", s === Number.prototype.toString);
 
 	//由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。
 	//let { prop: x } = undefined; // TypeError
@@ -125,10 +118,12 @@
 	    return x + y;
 	}
 
-	console.log("add([1, 2])", add([1, 2]));
+	console.log("4.add([1, 2])", add([1, 2]));
 
 	//试试以下两种写法的区别
-	function move() {
+
+	//如果没传参数,默认传递{},如果x映射不到,传递0,y映射不到,传递0
+	function move1() {
 	    var _ref3 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
 	    var _ref3$x = _ref3.x;
@@ -136,33 +131,34 @@
 	    var _ref3$y = _ref3.y;
 	    var y = _ref3$y === undefined ? 0 : _ref3$y;
 
-	    console.log("{x = 0, y = 0} = {}", x, y);
+	    console.log("4.{x = 0, y = 0} = {}", x, y);
 	}
 
-	move({ x: 3, y: 8 }); // [3, 8]
-	move({ x: 3 }); // [3, 0]
-	move({}); // [0, 0]
-	move(); // [0, 0]
+	move1({ x: 3, y: 8 }); // [3, 8]
+	move1({ x: 3 }); // [3, 0]
+	move1({}); // [0, 0]
+	move1(); // [0, 0]
 
-	function move() {
+	//如果没传参数,默认传递{ x: 0, y: 0 }
+	function move2() {
 	    var _ref4 = arguments.length <= 0 || arguments[0] === undefined ? { x: 0, y: 0 } : arguments[0];
 
 	    var x = _ref4.x;
 	    var y = _ref4.y;
 
-	    console.log("{x = 0, y = 0} = {}", x, y);
+	    console.log("5.{x = 0, y = 0} = {}", x, y);
 	}
-	move({ x: 3, y: 8 }); // [3, 8]
-	move({ x: 3 }); // [3, 0]
-	move({}); // [0, 0]
-	move(); // [0, 0]
+	move2({ x: 3, y: 8 }); // [3, 8]
+	move2({ x: 3 }); // [3, undefined]
+	move2({}); // [undefined, undefined]
+	move2(); // [0, 0]
 
 	//undefined就会触发函数参数的默认值。
 	var arr = [1, undefined, 3].map(function () {
 	    var x = arguments.length <= 0 || arguments[0] === undefined ? 'yes' : arguments[0];
 	    return x;
 	});
-	console.log(arr);
+	console.log("6." + arr);
 
 /***/ }
 /******/ ]);

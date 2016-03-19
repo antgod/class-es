@@ -52,7 +52,7 @@
 	"use strict";
 
 	var PI = 3.14;
-	console.log("const变量:" + PI);
+	console.log("1.const变量:" + PI);
 	//常量无法再次赋值，打开注释，编译报错
 	//console.log(PI = 3);
 
@@ -60,38 +60,32 @@
 	array.push("Hello"); // 可执行
 	array.length = 1; // 可执行
 
-	console.log(array);
 	// 打开注释，编译报错
 	//array = ["Dave"];
+
+	//const的所有特性与let相同，不存在变量提升，有块级作用域，不再累述
+
+	//对于复合类型的变量，变量名不指向数据，而是指向数据所在的地址。
+	//const命令只是保证变量名指向的地址不变，并不保证该地址的数据不变，所以将一个对象声明为常量必须非常小心。
+	var foo = {};
+	foo.prop = 123;
+	console.log("2.const 指向：" + foo.prop); // 123
+
+	//打开注释，编译报错，因为重新声明变量，改变了地址
+	//foo = {} // TypeError: "foo" is read-only
+
 	//
-	////const的所有特性与let相同，不存在变量提升，有块级作用域，不再累述
-	//
-	//
-	////对于复合类型的变量，变量名不指向数据，而是指向数据所在的地址。
-	////const命令只是保证变量名指向的地址不变，并不保证该地址的数据不变，所以将一个对象声明为常量必须非常小心。
-	//const foo = {};
-	//foo.prop = 123;
-	//
-	//console.log("const 丢向："+foo.prop);          // 123
-	//
-	//
-	////打开注释，编译报错，因为重新声明变量，改变了地址
-	////foo = {} // TypeError: "foo" is read-only
-	//
-	////如果真的想将对象冻结，应该使用Object.freeze方法。
-	//const obj = Object.freeze({});
-	////obj.prop = 123;    //运行报错，Can't add property prop, object is not extensible
-	//
-	//
+	console.log("3.如果真的想将对象冻结，应该使用Object.freeze方法");
+	var obj = Object.freeze({});
+	//obj.prop = 123;    //运行报错，Can't add property prop, object is not extensible
+
+	console.log("4.var,const会在全局增加属性,浏览器的全局window,node全局global,以下代码可以在node环境下测试");
 	//var a = 1;
-	//// 如果在Node的REPL环境，可以写成global.a
-	//// 或者采用通用方法，写成this.a
-	//console.log("var 全局变量:"+window.a);// 1,因为运行在webpack中本身带有模块化，所以是undefined
-	//
 	//const b = 1;
 	//let c = 1;
-	//console.log("const 全局变量:"+window.b); // undefined
-	//console.log("let 全局变量:"+window.c); // undefined
+	//console.log("4.var 全局变量:"+this.a);// 1
+	//console.log("4.const 全局变量:"+this.b); // 1
+	//console.log("4.let 全局变量:"+this.c); // undefined
 
 /***/ }
 /******/ ]);
