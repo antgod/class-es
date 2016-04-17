@@ -10,6 +10,7 @@
     if (fetch){
         var URL = 'a.json';
         fetch(URL,{mode: 'cors'}).then(function(response) {
+            console.log(response)
             return response.text();
         }).then(function(text) {
             console.log(text);
