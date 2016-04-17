@@ -7,6 +7,7 @@ var fs = require('fs');
 
 var readFile = function (fileName) {
     return new Promise(function (resolve, reject) {
+        //throw new Error('aaa');
         fs.readFile(fileName, function (error, data) {
             if (error) reject(error);
             resolve(data);
@@ -16,15 +17,19 @@ var readFile = function (fileName) {
 
 var asyncReadFile = function () {
     var ref = _asyncToGenerator(function* () {
-        var f1 = yield readFile('../etc/a.json');
-        var f2 = yield readFile('../etc/b.json');
-        console.log(f1.toString());
-        console.log(f2.toString());
+        try {
+            //如果try在外面,则捕获不到异步异常,因为 asyncReadFile 是一个异步函数
+            var f1 = yield readFile('../etc/a.json');
+            var f2 = yield readFile('../etc/b.json');
+            console.log(f1.toString());
+            console.log(f2.toString());
+        } catch (e) {
+            console.log(e.stack); //可以捕获到异步异常
+        }
     });
 
     return function asyncReadFile() {
         return ref.apply(this, arguments);
     };
 }();
-
-var result = asyncReadFile();
+asyncReadFile();

@@ -4,6 +4,7 @@ var fs = require("fs");
 var readFile = function (fileName) {
     return new Promise(function (resolve, reject) {
         fs.readFile(fileName, function (error, data) {
+            //error=new Error('出错啦12313');
             if (error) reject(error);
             resolve(data);
         });
@@ -20,5 +21,5 @@ var gen = function* () {
 co(gen).then(function () {
     console.log('Generator 函数执行完成');
 }, function (err) {
-    console.log(err);
+    console.log(err.stack);
 });

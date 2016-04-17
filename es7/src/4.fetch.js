@@ -18,6 +18,7 @@ g.next().value.then(function(res){
 }).then(function(data){
   return g.next(data).value;
 }).then(function(res){
+    console.log(res)       //这是一个response对象,会带有text属性
     return res.text();
 }).then(function(data){
     return g.next(data);
