@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function run (generator) {
+        var it = generator();
+
+        function go(result) {
+            if (result.done) return result.value;
+
+            if(result.value.constructor.name != 'Promise'){        //如果不是promise对象,转成promise对象
+                result.value=Promise.resolve(result.value);
+            }
+
+            return result.value.then(function (value) {
+                return go(it.next(value));
+            }, function (error) {
+                return go(it.throw(error));
+            });
+        }
+
+        go(it.next());
+    }
+
+    function getA () {
+        return new Promise(function (resolve, reject){
+            setTimeout(()=>resolve('A'),1000);
+        });
+    }
+
+    function getB () {
+        return new Promise(function (resolve, reject){
+            setTimeout(()=>resolve('B'),1000);
+        });
+    }
+
+    function getX(){
+        return 123;
+    }
+
+    var g = function* () {
+        var a = yield getA();
+        console.log(a);
+        var x = yield getX();
+        console.log(x);
+        var b = yield getB();
+        console.log(b);
+    };
+
+    run(g);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var preloadImage = function (path) {
+        return new Promise(function (resolve, reject) {
+            var image = new Image();
+            image.onload  = resolve;
+            image.onerror = reject;
+            image.src = path;
+        });
+    };
+
+    preloadImage('http://www.baidu.com/img/bd_logo1.png').then(function(e){
+        console.log(e.target.src);
+    })
+
+</script>
+</body>
+</html>

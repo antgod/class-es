@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="4.获取文件.js"></script>
+</head>
+<body>
+
+<script>
+    Promise.prototype.finally = function (callback) {
+        let P = this.constructor;
+        return this.then(
+            value  => P.resolve(callback()).then(() => value),
+            reason => P.resolve(callback()).then(() => { throw reason })
+        );
+    };
+
+
+    getJSON("config1.json").then(function(post) {
+        return getJSON(JSON.parse(post).url+1);
+    }).catch(data=>{
+        console.log(data);
+    }).finally(()=>{
+        console.log("finally");
+    })
+
+</script>
+</body>
+</html>

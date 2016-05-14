@@ -1,7 +1,6 @@
-/**
- * Created by lihongji on 16/3/15.
- */
+'use strict';
 var fs=require('fs');
+var co=require('co');
 
 var readFile=function(fileName){
     return new Promise(function (resolve, reject){
@@ -23,5 +22,9 @@ var asyncReadFile = async function (){
         console.log(e.stack);   //可以捕获到异步异常
     }
 };
-asyncReadFile();
+var g=co(asyncReadFile);
+
+g.then(data=>{
+    console.log(data)
+})
 

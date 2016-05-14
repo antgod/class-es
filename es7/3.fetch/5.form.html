@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<form action="http://localhost:8080" method="post"id="login-form">
+    <input name="test" />
+</form>
+<script>
+
+    var form = new FormData(document.getElementById('login-form'));
+    fetch("http://localhost:8080", {
+        method: "POST",
+        body: form,
+        mode:'no-cors'
+    }).then(function(response) {
+       console.log('返回成功')
+    }).catch(function(error) {
+        console.log(error.stack)
+    });
+
+</script>
+</body>
+</html>

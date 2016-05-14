@@ -8,6 +8,8 @@ var app = koa();
 
 // response
 app.use(function *(){
+    console.log(this.headers.test)
+
     var request=this.request;
     if(request.url=="/a"){
         this.body = `{
