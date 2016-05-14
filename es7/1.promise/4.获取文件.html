@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="4.获取文件.js"></script>
+</head>
+<body>
+
+<script>
+    getJSON("config.json").then(function(post) {
+        return getJSON(JSON.parse(post).url);
+    },function(error) {
+        console.log('出错1',error)
+    }).then(function(comments) {
+        console.log(comments)
+    }).catch(function(error) {
+        console.log('出错2',error)
+    });
+</script>
+</body>
+</html>

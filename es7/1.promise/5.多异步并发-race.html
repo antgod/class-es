@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="4.获取文件.js"></script>
+</head>
+<body>
+
+<script>
+
+//上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的回调函数。
+
+
+var p = Promise.race([
+    fetch('config.json'),
+    new Promise(function (resolve, reject) {
+        setTimeout(() => reject(new Error('request timeout')), 5000)
+    })
+])
+p.then(response => response.text()).then(data=>console.log(data));
+p.catch(error => console.log(error))
+</script>
+</body>
+</html>
