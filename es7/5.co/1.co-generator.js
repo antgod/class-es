@@ -25,7 +25,7 @@ co(gen).then(function (value) {
 });
 
 //Convert a generator into a regular function that returns a Promise.
-var fn = co.wrap(function* () {
+var fn = co.wrap(function* () {           //此时getA,getB函数都不会执行
     var a = yield getA();
     return yield getB();
 });

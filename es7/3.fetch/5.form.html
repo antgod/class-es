@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
-<form action="http://localhost:8080" method="post"id="login-form">
-    <input name="test" />
+<script>
+    function submit1(){
+        var form = new FormData(document.getElementById('login-form'));
+        form.append("username", "Groucho");
+        form.append("accountnum", 123456);
+        fetch('http://localhost:8080/a',{body:form,method:'POST'}).then(function(response) {
+            console.log(response);
+        }).catch(error=>{
+            console.log(error.stack);
+        });
+    }
+</script>
+<form  method="post" id="login-form"  enctype="multipart/form-data">
+    <input name="name" />
+    <button onclick="submit1()">提交</button>
 </form>
 <script>
 
-    var form = new FormData(document.getElementById('login-form'));
-    fetch("http://localhost:8080", {
-        method: "POST",
-        body: form,
-        mode:'no-cors'
-    }).then(function(response) {
-       console.log('返回成功')
-    }).catch(function(error) {
-        console.log(error.stack)
-    });
+
+
 
 </script>
 </body>
