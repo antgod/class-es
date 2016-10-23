@@ -44,12 +44,6 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	"use strict";
-
-	var _a;
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 	console.log("-------Symbol---------");
 
 	//ES5的对象属性名都是字符串，这容易造成属性名的冲突。这就是ES6引入Symbol的原因。
@@ -64,7 +58,10 @@
 	a[mySymbol] = 'Hello!';
 
 	// 第二种写法
-	var a = (_a = {}, _defineProperty(_a, mySymbol, "aaa"), _defineProperty(_a, yourSymbol, "bbb"), _a);
+	var a = {
+	    [mySymbol]: "aaa",
+	    [yourSymbol]: "bbb"
+	};
 
 	// 第三种写法
 	var a = {};
@@ -75,8 +72,10 @@
 	//注意，不能用.操作符或者方括号加双引，这样都会访问字符串属性
 	console.log("2.输出Symbol", a[mySymbol]); // "Hello!"
 
-	var s = Symbol();
-	var obj = _defineProperty({}, s, function (arg) {});
+	let s = Symbol();
+	let obj = {
+	    [s](arg) {}
+	};
 
 	console.log("3.输出Symbol属性", obj[s]);
 
@@ -85,7 +84,7 @@
 
 	//可以发现shapeType.triangle等于哪个值并不重要
 	//只要确保不会跟其他shapeType属性的值冲突即可。因此，这里就很适合改用Symbol值。
-	var shapeType = {
+	const shapeType = {
 	    triangle: Symbol()
 	};
 

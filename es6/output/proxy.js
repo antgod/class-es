@@ -48,10 +48,8 @@
 	 * Created by lihongji on 16/3/19.
 	 */
 
-	"use strict";
-
 	var proxy = new Proxy({}, {
-	    get: function get(target, property) {
+	    get: function (target, property) {
 	        return 35;
 	    }
 	});

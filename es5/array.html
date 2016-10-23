@@ -7,8 +7,13 @@
 			//查找
 			var j={a:1};
 			var a = [j];
-			
-			//alert(a.indexOf(j));
+
+			//判断
+			console.log(Array.isArray(a))
+
+			//查找
+			console.log(a.indexOf(j))
+			console.log(a.lastIndexOf(j))
 			
 			var b=[1,2,3,4];
 			//迭代
@@ -45,6 +50,20 @@
 // 			});
 			
 // 			console.log(res);
+
+			var res=b.reduce(function(last,next){
+				last[next] = Math.random()
+				return last;
+			},{});
+
+			console.log(res)
+
+			var res=b.reduceRight(function(last,next){
+				last.push(next)
+				return last;
+			},[]);
+
+			console.log(res)
 
 			b.forEach(function(item,index,array){
 				console.log("item:"+item);

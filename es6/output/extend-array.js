@@ -44,8 +44,6 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	'use strict';
-
 	console.log("-------数组扩展---------");
 
 	var arrayLike = {
@@ -64,7 +62,7 @@
 	console.log("1.es6，json2array", arr2);
 
 	// NodeList对象
-	var ps = document.querySelectorAll('script');
+	let ps = document.querySelectorAll('script');
 	Array.from(ps).forEach(function (p) {
 	    console.log("2.NodeList转数组", p);
 	});
@@ -77,10 +75,15 @@
 	foo(1, 2, 3);
 
 	//数组实例的find方法，用于找出第一个符合条件的数组成员。它的参数是一个回调函数
-	var num = [1, 4, -5, 10].find(function (n) {
-	    return n < 0;
-	});
+	var num = [1, 4, -5, 10].find(n => n < 0);
 	console.log("3.find函数，找到第一个匹配元素" + num);
+
+	//返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1。
+	var findIndex = [1, 5, 10, 15].findIndex(function (value, index, arr) {
+	    return value > 9;
+	}); // 2
+
+	console.log("4.findIndex函数，找到第一个匹配元素索引" + findIndex);
 
 /***/ }
 /******/ ]);

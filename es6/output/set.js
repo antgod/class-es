@@ -45,39 +45,15 @@
 /***/ function(module, exports) {
 
 	//ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
-	'use strict';
-
 	var s = new Set();
 
-	[2, 3, 5, 4, 5, 2, 2].map(function (x) {
-	  return s.add(x);
-	});
+	[2, 3, 5, 4, 5, 2, 2].map(x => s.add(x));
 
-	var _iteratorNormalCompletion = true;
-	var _didIteratorError = false;
-	var _iteratorError = undefined;
-
-	try {
-	  for (var _iterator = s[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	    var i = _step.value;
-	    console.log("1.遍历set", i);
-	  }
-	} catch (err) {
-	  _didIteratorError = true;
-	  _iteratorError = err;
-	} finally {
-	  try {
-	    if (!_iteratorNormalCompletion && _iterator['return']) {
-	      _iterator['return']();
-	    }
-	  } finally {
-	    if (_didIteratorError) {
-	      throw _iteratorError;
-	    }
-	  }
+	for (let i of s) {
+	  console.log("1.遍历set", i);
 	}
 
-	var set = new Set(['red', 'green', 'blue']);
+	let set = new Set(['red', 'green', 'blue']);
 	console.log("2.输出set", set);
 
 	//JavaScript的对象（Object），本质上是键值对的集合（Hash结构）
