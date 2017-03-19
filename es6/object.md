@@ -1,4 +1,4 @@
-###属性名表达式
+### 属性名表达式
 JavaScript语言定义对象的属性，有两种方法。
 
 如果使用字面量方式定义对象（使用大括号），在ES5中只能使用方法一（标识符）定义属性。
@@ -47,7 +47,7 @@ ES6允许字面量定义对象时，用方法二（表达式）作为对象的�
 	// 正确
 	var foo = 'bar';
 	var baz = { [foo]: 'abc'};
-###方法的name属性
+### 方法的name属性
 函数的name属性，返回函数名。对象方法也是函数，因此也有name属性。
 
 	var person = {
@@ -83,7 +83,7 @@ ES6允许字面量定义对象时，用方法二（表达式）作为对象的�
 	obj[key2].name // ""
 上面代码中，key1对应的Symbol值有描述，key2没有。
 
-###Object.is()
+### Object.is()
 ES5比较两个值是否相等，只有两个运算符：相等运算符（==）和严格相等运算符（===）。它们都有缺点，前者会自动转换数据类型，后者的NaN不等于自身，以及+0等于-0。JavaScript缺乏一种运算，在所有环境中，只要两个值是一样的，它们就应该相等。
 
 ES6提出“Same-value equality”（同值相等）算法，用来解决这个问题。Object.is就是部署这个算法的新方法。它用来比较两个值是否严格相等，与严格比较运算符（===）的行为基本一致。
@@ -114,7 +114,7 @@ ES5可以通过下面的代码，部署Object.is。
 	  enumerable: false,
 	  writable: true
 	});
-###Object.assign()
+### Object.assign()
 基本用法
 Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
 
@@ -208,7 +208,7 @@ Object.assign方法实行的是浅拷贝，而不是深拷贝。也就是说，�
 	// [4, 5, 3]
 上面代码中，Object.assign把数组视为属性名为0、1、2的对象，因此目标数组的0号属性4覆盖了原数组的0号属性1。
 
-####常见用途
+#### 常见用途
 Object.assign方法有很多用处。
 
 （1）为对象添加属性
@@ -312,7 +312,7 @@ ES6新增了一个操作Object.assign()，会忽略enumerable为false的属性�
 	// false
 总的来说，操作中引入继承的属性会让问题复杂化，大多数时候，我们只关心对象自身的属性。所以，尽量不要用for...in循环，而用Object.keys()代替。
 
-###属性的遍历
+### 属性的遍历
 ES6一共有5种方法可以遍历对象的属性。
 
 - for...in
@@ -346,7 +346,7 @@ ES6一共有5种方法可以遍历对象的属性。
 ```	
 上面代码中，Reflect.ownKeys方法返回一个数组，包含了参数对象的所有属性。这个数组的属性次序是这样的，首先是数值属性2和10，其次是字符串属性b和a，最后是Symbol属性。
 
-###__proto__属性，Object.setPrototypeOf()，Object.getPrototypeOf()
+### __proto__属性，Object.setPrototypeOf()，Object.getPrototypeOf()
 - __proto__属性
 
 __proto__属性（前后各两个下划线），用来读取或设置当前对象的prototype对象。目前，所有浏览器（包括IE11）都部署了这个属性。
@@ -439,8 +439,8 @@ Object.setPrototypeOf方法的作用与__proto__相同，用来设置一个对�
 	Object.setPrototypeOf(rec, Object.prototype);
 	Object.getPrototypeOf(rec) === Rectangle.prototype
 	// false
-###Object.values()，Object.entries()
-####Object.keys()
+### Object.values()，Object.entries()
+#### Object.keys()
 ES5引入了Object.keys方法，返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名。
 
 	var obj = { foo: "bar", baz: 42 };
@@ -462,7 +462,7 @@ ES5引入了Object.keys方法，返回一个数组，成员是参数对象自身
 	for (let [key, value] of entries(obj)) {
 	  console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]
 	}
-####Object.values()
+#### Object.values()
 Object.values方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值。
 
 	var obj = { foo: "bar", baz: 42 };
@@ -495,7 +495,7 @@ Object.values会过滤属性名为Symbol值的属性。
 
 	Object.values(42) // []
 	Object.values(true) // []
-####Object.entries
+#### Object.entries
 Object.entries方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组。
 
 	var obj = { foo: 'bar', baz: 42 };

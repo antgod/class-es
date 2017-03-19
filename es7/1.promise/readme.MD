@@ -1,4 +1,4 @@
-##1.Promise的含义
+## 1.Promise的含义
 
 Promise是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6将其写进了语言标准，统一了用法，原生提供了Promise对象。
 
@@ -19,7 +19,7 @@ Promise也有一些缺点。
 
 如果某些事件不断地反复发生，一般来说，使用stream模式是比部署Promise更好的选择。
 
-##2.基本用法
+## 2.基本用法
 ES6规定，Promise对象是一个构造函数，用来生成Promise实例。
 
 下面代码创造了一个Promise实例。
@@ -182,7 +182,7 @@ p2.catch(error => console.log(error))
 上面代码中，p1是一个Promise，3秒之后变为rejected。p2的状态由p1决定，1秒之后，p2调用resolve方法，但是此时p1的状态还没有改变，因此p2的状态也不会变。又过了2秒，p1变为rejected，p2也跟着变为rejected。
 
 
-##3.Promise.prototype.then()
+## 3.Promise.prototype.then()
 Promise实例具有then方法，也就是说，then方法是定义在原型对象Promise.prototype上的。它的作用是为Promise实例添加状态改变时的回调函数。前面说过，then方法的第一个参数是Resolved状态的回调函数，第二个参数（可选）是Rejected状态的回调函数。
 
 then方法返回的是一个新的Promise实例（注意，不是原来那个Promise实例）。因此可以采用链式写法，即then方法后面再调用另一个then方法。
@@ -225,7 +225,7 @@ getJSON("/post/1.json").then(
 );
 ```
 
-##4.Promise.prototype.catch()
+## 4.Promise.prototype.catch()
 Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数。
 
 ```
@@ -459,7 +459,7 @@ someAsyncThing().then(function() {
 
 上面代码中，第二个catch方法用来捕获，前一个catch方法抛出的错误。
 
-##5.Promise.all()
+## 5.Promise.all()
 Promise.all方法用于将多个Promise实例，包装成一个新的Promise实例。
 
 var p = Promise.all([p1, p2, p3]);
@@ -509,7 +509,7 @@ Promise.all([
 ```
 上面代码中，booksPromise和userPromise是两个异步操作，只有等到它们的结果都返回了，才会触发pickTopRecommentations这个回调函数。
 
-##6.Promise.race()
+## 6.Promise.race()
 Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例。
 
 var p = Promise.race([p1,p2,p3]);
@@ -533,7 +533,7 @@ p.catch(error => console.log(error))
 
 上面代码中，如果5秒之内fetch方法无法返回结果，变量p的状态就会变为rejected，从而触发catch方法指定的回调函数。
 
-##7.Promise.resolve()
+## 7.Promise.resolve()
 有时需要将现有对象转为Promise对象，Promise.resolve方法就起到这个作用。
 
 
@@ -620,7 +620,7 @@ p.then(function () {
 
 上面代码的变量p就是一个Promise对象。
 
-##8.Promise.reject()
+## 8.Promise.reject()
 Promise.reject(reason)方法也会返回一个新的Promise实例，该实例的状态为rejected。它的参数用法与Promise.resolve方法完全一致。
 
 
@@ -636,10 +636,10 @@ p.then(null, function (s){
 ```
 上面代码生成一个Promise对象的实例p，状态为rejected，回调函数会立即执行。
 
-##9.两个有用的附加方法
+## 9.两个有用的附加方法
 ES6的Promise API提供的方法不是很多，有些有用的方法可以自己部署。下面介绍如何部署两个不在ES6之中、但很有用的方法。
 
-###done()
+### done()
 Promise对象的回调链，不管以then方法或catch方法结尾，要是最后一个方法抛出错误，都有可能无法捕捉到（因为Promise内部的错误不会冒泡到全局）。因此，我们可以提供一个done方法，总是处于回调链的尾端，保证抛出任何可能出现的错误。
 
 
@@ -666,7 +666,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
 
 从上面代码可见，done方法的使用，可以像then方法那样用，提供Fulfilled和Rejected状态的回调函数，也可以不提供任何参数。但不管怎样，done都会捕捉到任何可能出现的错误，并向全局抛出。
 
-###finally()
+### finally()
 finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。它与done方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行。
 
 下面是一个例子，服务器使用Promise处理请求，然后使用finally方法关掉服务器。
@@ -695,8 +695,8 @@ Promise.prototype.finally = function (callback) {
 
 上面代码中，不管前面的Promise是fulfilled还是rejected，都会执行回调函数callback。
 
-##10.应用
-###加载图片
+## 10.应用
+### 加载图片
 我们可以将图片的加载写成一个Promise，一旦加载完成，Promise的状态就发生变化。
 
 
@@ -711,7 +711,7 @@ onst preloadImage = function (path) {
 };
 ```
 
-###Generator函数与Promise的结合
+### Generator函数与Promise的结合
 使用Generator函数管理流程，遇到异步操作的时候，通常返回一个Promise对象。
 
 
@@ -752,7 +752,7 @@ run(g);
 
 上面代码的Generator函数g之中，有一个异步操作getFoo，它返回的就是一个Promise对象。函数run用来处理这个Promise对象，并调用下一个next方法。
 
-##11.async函数
+## 11.async函数
 async函数与Promise、Generator函数一样，是用来取代回调函数、解决异步操作的一种方法。它本质上是Generator函数的语法糖。async函数并不属于ES6，而是被列入了ES7，但是traceur、Babel.js、regenerator等转码器已经支持这个功能，转码后立刻就能使用。
 
 async函数的详细介绍，请看《异步操作》一章。

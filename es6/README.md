@@ -45,7 +45,7 @@ ES6从开始制定到最后发布，整整用了15年。
 
 2015年6月，ECMAScript 6正式通过，成为国际标准。从2000年算起，这时已经过去了15年。
 
-##3.部署进度 ##
+## 3.部署进度 ##
 各大浏览器的最新版本，对ES6的支持可以查看kangax.github.io/es5-compat-table/es6/。随着时间的推移，支持度已经越来越高了，ES6的大部分特性都实现了。
 
 Node.js是JavaScript语言的服务器运行环境，对ES6的支持度比浏览器更高。通过Node，可以体验更多ES6的特性。建议使用版本管理工具nvm，来安装Node，因为可以自由切换版本。不过，nvm不支持Windows系统，如果你使用Windows系统，下面的操作可以改用nvmw或nvm-windows代替。
@@ -224,7 +224,7 @@ Babel转码器可以通过安装和使用插件来使用各个stage的语法。
 
 ## 6.ECMAScript 教程目录 ##
 
-###语法糖篇
+### 语法糖篇
 1. let、block、const
 1. varable、variable_array、variable_other、variable_application
 1. extend-other、extend-fun1、extend-fun2、extend-obj
@@ -235,7 +235,7 @@ Babel转码器可以通过安装和使用插件来使用各个stage的语法。
 1. module、export
 1. style（参见网站）
 
-###异步编程篇
+### 异步编程篇
 1. Promise
 1. Fetch
 1. Async
