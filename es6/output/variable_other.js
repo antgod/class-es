@@ -42,48 +42,79 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	//对象解构赋值：
 
+	"use strict";
+
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
+
 	console.log("-------对象解构赋值---------");
-	var { bar, foo } = { foo: "aaa", bar: "bbb" };
+	var _foo$bar = { foo: "aaa", bar: "bbb" };
+	var bar = _foo$bar.bar;
+	var foo = _foo$bar.foo;
+
 	console.log('1.{ bar, foo } = { foo: "aaa", bar: "bbb" }', bar, foo);
 
 	//如果变量名与属性名不一致，必须写成下面这样。
 	var obj = { first: 'hello', last: 'world' };
-	var { first: f, last: l } = obj;
+	var f = obj.first;
+	var l = obj.last;
+
 	console.log("1.{ first: 'hello', last: 'world' }", f, l);
 
 	//上面代码将Math对象的对数、正弦、余弦三个方法，赋值到对应的变量上，使用起来就会方便很多。
-	let { log, sin, cos } = Math;
+	var log = Math.log;
+	var sin = Math.sin;
+	var cos = Math.cos;
+
 	console.log('1.{ log, sin, cos } = Math', log, sin, cos);
 
 	//字符串解构赋值：
 	console.log("-------字符串解构赋值---------");
 	//字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象
-	var [a, b, c, d, e] = 'hello';
+	var _hello = 'hello';
+
+	var _hello2 = _slicedToArray(_hello, 5);
+
+	var a = _hello2[0];
+	var b = _hello2[1];
+	var c = _hello2[2];
+	var d = _hello2[3];
+	var e = _hello2[4];
+
 	console.log("2.[a, b, c, d, e] = 'hello'", a, b, c, d, e);
 	//类似数组的对象都有一个length属性，因此还可以对这个属性解构赋值。
-	var { length: len } = 'hello';
+	var _hello3 = 'hello';
+	var len = _hello3.length;
+
 	console.log("2.{length : len} = 'hello'", len);
 
 	//其他解构赋值：
 	console.log("-------其他解构赋值---------");
 	//解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
-	var { toString: s } = 123;
+	var _ = 123;
+	var s = _.toString;
+
 	console.log("3.s === Number.prototype.toString", s === Number.prototype.toString);
-	var { toString: s } = true;
+	var _true = true;
+	var s = _true.toString;
+
 	console.log("3.s === Boolean.prototype.toString", s === Number.prototype.toString);
 
 	//由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。
 	//let { prop: x } = undefined; // TypeError
 	//let { prop: y } = null; // TypeError
 
-
 	//函数参数解构赋值：
 	console.log("-------函数参数解构赋值---------");
-	function add([x, y]) {
+	function add(_ref) {
+	    var _ref2 = _slicedToArray(_ref, 2);
+
+	    var x = _ref2[0];
+	    var y = _ref2[1];
+
 	    return x + y;
 	}
 
@@ -92,7 +123,14 @@
 	//试试以下两种写法的区别
 
 	//如果没传参数,默认传递{},如果x映射不到,传递0,y映射不到,传递0
-	function move1({ x = 0, y = 0 } = {}) {
+	function move1() {
+	    var _ref3 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	    var _ref3$x = _ref3.x;
+	    var x = _ref3$x === undefined ? 0 : _ref3$x;
+	    var _ref3$y = _ref3.y;
+	    var y = _ref3$y === undefined ? 0 : _ref3$y;
+
 	    console.log("4.{x = 0, y = 0} = {}", x, y);
 	}
 
@@ -102,7 +140,12 @@
 	move1(); // [0, 0]
 
 	//如果没传参数,默认传递{ x: 0, y: 0 }
-	function move2({ x, y } = { x: 0, y: 0 }) {
+	function move2() {
+	    var _ref4 = arguments.length <= 0 || arguments[0] === undefined ? { x: 0, y: 0 } : arguments[0];
+
+	    var x = _ref4.x;
+	    var y = _ref4.y;
+
 	    console.log("5.{x = 0, y = 0} = {}", x, y);
 	}
 	move2({ x: 3, y: 8 }); // [3, 8]
@@ -110,10 +153,12 @@
 	move2({}); // [undefined, undefined]
 	move2(); // [0, 0]
 
-
 	//undefined就会触发函数参数的默认值。
-	var arr = [1, undefined, 3].map((x = 'yes') => x);
+	var arr = [1, undefined, 3].map(function () {
+	    var x = arguments.length <= 0 || arguments[0] === undefined ? 'yes' : arguments[0];
+	    return x;
+	});
 	console.log("6." + arr);
 
-/***/ }
+/***/ })
 /******/ ]);

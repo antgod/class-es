@@ -42,10 +42,12 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	//ES5只有全局作用域和函数作用域，没有块级作用域，这带来很多不合理的场景。
 	//第一种场景，内层变量可能会覆盖外层变量。
+
+	"use strict";
 
 	var tmp = Date.now();
 
@@ -86,7 +88,7 @@
 	        {
 	            {
 	                {
-	                    let b = 1;
+	                    var _b = 1;
 	                }console.log("4.块级作用域let-外部:" + typeof b);
 	            }
 	        }
@@ -108,8 +110,8 @@
 
 	// 块级作用域写法
 	if (true) {
-	    let date = Date.now();
-	    console.log("6.let 作用域内部：" + date);
+	    var _date = Date.now();
+	    console.log("6.let 作用域内部：" + _date);
 	}
 	console.log("6.let 作用域外部：" + typeof date);
 
@@ -122,9 +124,10 @@
 	(function () {
 	    if (false) {
 	        // 重复声明一次函数f
-	        function fun() {
+
+	        var _fun = function _fun() {
 	            console.log('7.I am inside!');
-	        }
+	        };
 	    }
 	    fun();
 	})();
@@ -132,5 +135,5 @@
 	//这是因为ES5存在函数提升，不管会不会进入 if代码块，函数声明都会提升到当前作用域的顶部，得到执行。
 	//而ES6支持块级作用域，不管会不会进入if代码块，其内部声明的函数皆不会影响到作用域的外部。
 
-/***/ }
+/***/ })
 /******/ ]);

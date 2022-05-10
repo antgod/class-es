@@ -42,14 +42,16 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/**
 	 * Created by lihongji on 16/3/19.
 	 */
 
+	"use strict";
+
 	var proxy = new Proxy({}, {
-	    get: function (target, property) {
+	    get: function get(target, property) {
 	        return 35;
 	    }
 	});
@@ -58,5 +60,5 @@
 	console.log(proxy.name); // 35
 	console.log(proxy.title); // 35
 
-/***/ }
+/***/ })
 /******/ ]);
